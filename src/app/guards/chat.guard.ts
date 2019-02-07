@@ -17,7 +17,7 @@ export class ChatGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
     const user: User = JSON.parse(localStorage.getItem('user'));
-    if (user.id && user.username) {
+    if (user.Id && user.Username) {
       return true;
     }
     this.router.navigate(['login']);

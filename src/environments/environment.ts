@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  websoccketUrl: 'ws://localhost:5000',
-  apiUrl: 'http://localhost:5000/api'
+  websoccketUrl: 'ws://localhost:8112',
+  apiUrl: 'http://localhost:8112/api'
 };
 
 /*

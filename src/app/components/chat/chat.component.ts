@@ -53,6 +53,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         message.Color = 'Black';
         this.messages.push(message);
       }
+      this.form.controls.message.reset();
     });
   }
 
@@ -65,13 +66,12 @@ export class ChatComponent implements OnInit, OnDestroy {
         if (symbol) {
           command.Code = symbol;
           command.Socketid = localStorage.getItem('Socketid');
-
           this.chatService.sendCommand(command);
         }
       } else {
         this.currentProcess = Processes.SendMessage;
         const message: Message = new Message();
-        message.Username = this.user.username;
+        message.Username = this.user.Username;
         message.Content = this.form.controls.message.value;
         message.Color = this.userColor;
         this.chatService.sendMessage(message);

@@ -32,17 +32,18 @@ export class LoginComponent implements OnInit {
     if (this.form.valid) {
       this.loading = true;
       const user: User = new User();
-      user.username = this.form.controls.username.value;
+      user.Username = this.form.controls.username.value;
       this.authService.createUser(user).subscribe(
         (createdUser: User) => {
-          if (createdUser.id) {
+          console.log(createdUser);
+          if (createdUser.Id) {
             localStorage.setItem('user', JSON.stringify(createdUser));
             this.router.navigate(['chat']);
           }
           this.loading = false;
         },
         error => {
-          if (error.error.search(`(${user.username})`) !== -1) {
+          if (error.error.search(`(${user.Username})`) !== -1) {
             this.loading = false;
             return this.toastr.error('This username already exists.');
           }

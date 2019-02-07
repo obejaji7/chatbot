@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs/';
 import { map } from 'rxjs/operators';
 import { WebsocketService } from '../websocket/websocket.service';
-import { Message  } from '../../interfaces/IMessage';
-import { Command  } from '../../interfaces/Command';
+import { Message } from '../../interfaces/IMessage';
+import { Command } from '../../interfaces/Command';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +17,6 @@ export class ChatService {
     private webscoketService: WebsocketService,
     private httpClient: HttpClient
   ) {
-    this.connect();
-  }
-
-  connect () {
     this.messages = <Subject<any>>(
       this.webscoketService.connect(environment.websoccketUrl).pipe(
         map(
@@ -37,15 +33,19 @@ export class ChatService {
   }
 
   sendMessage(message: Message) {
-    this.httpClient.post(`${environment.apiUrl}/message`, message).toPromise();
+    this.httpClient.post(`${environment.apiUrl}/messages`, message).toPromise();
   }
 
   sendCommand(command: Command) {
-    this.httpClient.post(`${environment.apiUrl}/rabbitmq`, command).toPromise();
+    this.httpClient.post(`${environment.apiUrl}/bot`, command).toPromise();
   }
 
   getMessages(): Observable<Message[]> {
-    return this.httpClient.get<Message[]>(`${environment.apiUrl}/message`).pipe(
+    return this.httpClient.get<Message[]>(`${environment.apiUrl}/messages`, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    }).pipe(
       map(messages =>
         messages.map(message => {
           const m = new Message();

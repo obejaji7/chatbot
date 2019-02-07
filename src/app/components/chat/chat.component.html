@@ -5,7 +5,7 @@
       <div style="overflow-y: scroll;" class="card-body">
         <ul class="p-0 m-0" style="list-style-type: none;">
           <li class="mb-2" *ngFor="let _user of users">
-            <span class="font-weight-bold">{{_user.username === user.username ? 'Me' : _user.username}}</span>
+            <span class="font-weight-bold">{{_user.Username === user.Username ? 'Me' : _user.Username}}</span>
           </li>
         </ul>
       </div>
@@ -15,14 +15,14 @@
     <div class="card h-100">
       <div class="card-header">
         You are connected as
-        <span class="font-weight-bold">{{ user.username }}</span>
+        <span class="font-weight-bold">{{ user.Username }}</span>
       </div>
       <div style="overflow-y: scroll;" class="card-body">
         <ul class="p-0 m-0" style="list-style-type: none;">
           <li class="mb-3" *ngFor="let message of messages">
             <span [ngStyle]="{ color: message.Color }" class="font-weight-bold"
               >{{
-                user.username === message.Username ? 'You' : message.Username
+                user.Username === message.Username ? 'You' : message.Username
               }}:</span
             >
             <span class="ml-2">{{ message.Content }}</span>
