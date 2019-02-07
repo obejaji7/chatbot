@@ -1,0 +1,53 @@
+<div class=" h-75  d-flex justify-content-center">
+  <div class="h-100 mt-5">
+    <div class="card h-100">
+      <div class="card-header">Users</div>
+      <div style="overflow-y: scroll;" class="card-body">
+        <ul class="p-0 m-0" style="list-style-type: none;">
+          <li class="mb-2" *ngFor="let _user of users">
+            <span class="font-weight-bold">{{_user.username === user.username ? 'Me' : _user.username}}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="w-50 h-100 px-1 mt-5">
+    <div class="card h-100">
+      <div class="card-header">
+        You are connected as
+        <span class="font-weight-bold">{{ user.username }}</span>
+      </div>
+      <div style="overflow-y: scroll;" class="card-body">
+        <ul class="p-0 m-0" style="list-style-type: none;">
+          <li class="mb-3" *ngFor="let message of messages">
+            <span [ngStyle]="{ color: message.Color }" class="font-weight-bold"
+              >{{
+                user.username === message.Username ? 'You' : message.Username
+              }}:</span
+            >
+            <span class="ml-2">{{ message.Content }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <form [formGroup]="form" class="form-inline w-75" (submit)="submit()">
+          <div class="d-flex justify-content-start align-items-center w-100">
+            <div class="form-group px-sm-3 mb-2 w-100">
+              <input
+                type="text"
+                class="form-control w-100"
+                formControlName="message"
+                id="message"
+                name="message"
+                #message
+                placeholder="Enter your message."
+                required
+              />
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

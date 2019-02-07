@@ -1,0 +1,12 @@
+<div class="d-flex flex-column justify-content-center align-items-center">
+  <img src="/assets/images/chatbot.png" class="img-fluid w-25" alt="">
+  <form [formGroup]="form" class="form-inline w-25">
+    <div class="form-group px-sm-3 mb-2 w-75">
+      <input type="text" class="form-control w-100" formControlName="username" id="username" name="username" #username placeholder="Enter your username and start chatting." required>
+    </div>
+    <button type="button" (click)="createChatSession(username.value)" class="btn btn-primary mb-2 w-25">Let's Start</button>
+  </form>
+  <div *ngIf="loading" class="progress w-25 mt-3">
+    <div  class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+  </div>
+</div>
